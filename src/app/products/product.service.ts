@@ -3,26 +3,18 @@ import { HttpClient } from "@angular/common/http";
 import { IProduct } from "./product";
 import { Observable } from "rxjs/Observable";
 //import "rxjs/add/operator/throw";
+import "rxjs/add/operator/map";
 import "rxjs/add/operator/catch";
 import "rxjs/add/operator/do";
 import { HttpErrorResponse } from "@angular/common/http";
-
-
-//const productJSON = "./api/products/products.json";
 
 @Injectable()
 export class ProductService {
 
   private productUrl = "./api/products/products.json";
 
-  products: any;
-
-
   constructor(private http: HttpClient) {
-    //let productList: any = this.http.get(this.productJSON);
-    //this.products = productList;
   }
-
 
   //the observable type is required here.
   //getProducts is returning an observable from the productUrl
@@ -31,6 +23,12 @@ export class ProductService {
       .do(data => console.log('All: ' + JSON.stringify(data)))
       .catch(this.handleError);
   }
+
+  getProduct(id: number): Observable<IProduct> {
+    return this.getProducts()
+      .map((products: IProduct[]) => products.find(p => p.productId === id));
+  }
+
 
   private handleError(err: HttpErrorResponse) {
     console.log(err.message);
