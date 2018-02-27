@@ -32,7 +32,7 @@ import { WelcomeComponent } from "./home/welcome.component";
       { path: 'products/:id', component: ProductDetailComponent },
       { path: 'welcome', component: WelcomeComponent },
       { path: '', redirectTo: 'welcome', pathMatch: 'full' },
-      //{ path: '**', component: PageNotFoundComponent }
+      { path: '**', redirectTo: 'welcome', pathMatch: 'full' }
     ])
   ],
   providers: [ ProductService ],
