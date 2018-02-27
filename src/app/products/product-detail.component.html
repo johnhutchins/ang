@@ -2,4 +2,35 @@
   <div class="panel-heading">
     {{pageTitle + ': ' + product.productName}}
   </div>
+  <div class="col-md-6">
+    <h3>{{product.productName}}</h3>
+    <p>{{product.price}}</p>
+    <p>{{product.description}}</p>
+  </div>
+  <div class="col-md-6">
+    <img [src]="product.imageUrl"/>
+  </div>
+  <!--<table>
+    <thead>
+    <tr>
+      <td>Product Name</td>
+      <td>Cost</td>
+      <td>ID</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>{{product.productName}}</td>
+      <td>{{product.price}}</td>
+      <td>{{product.productId}}</td>
+    </tr>
+    </tbody>
+  </table>-->
+
+  <div class="panel-footer">
+    <a class="btn btn-primary" (click)='onBack()' style='width: 80px'>
+      <i class="glyphicon glyphicon-chevron-left"></i>Back
+    </a>
+  </div>
 </div>
+
