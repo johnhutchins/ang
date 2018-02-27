@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute, Router, RoutesRecognized} from "@angular/router";
+import "rxjs/add/operator/filter";
+import "rxjs/add/operator/pairwise";
 
 import {IProduct} from "./product";
 import { ProductService } from "./product.service";
@@ -35,5 +37,13 @@ export class ProductDetailComponent implements OnInit {
     this.productService.getProduct(id).subscribe(
       product => this.product = product,
       error => this.errorMessage = <any>error);
+
+      this.router.events
+      .filter((e: any) => e instanceof RoutesRecognized)
+      .pairwise()
+      .subscribe((e: any) => {
+        console.log(e[0].url);
+        //console.log("first route is: ", e[0], ". Second is: ", e[1]);
+      });
   }
 }
