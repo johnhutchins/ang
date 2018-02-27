@@ -2,7 +2,15 @@
   <div class="panel-heading">
     {{pageTitle + ': ' + product.productName}}
   </div>
-  <table>
+  <div class="col-md-6">
+    <h3>{{product.productName}}</h3>
+    <p>{{product.price}}</p>
+    <p>{{product.description}}</p>
+  </div>
+  <div class="col-md-6">
+    <img [src]="product.imageUrl"/>
+  </div>
+  <!--<table>
     <thead>
     <tr>
       <td>Product Name</td>
@@ -17,7 +25,7 @@
       <td>{{product.productId}}</td>
     </tr>
     </tbody>
-  </table>
+  </table>-->
 
   <div class="panel-footer">
     <a class="btn btn-primary" (click)='onBack()' style='width: 80px'>
