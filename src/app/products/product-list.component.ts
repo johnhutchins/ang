@@ -15,7 +15,7 @@ export class ProductListComponent implements OnInit {
   border: any[] = [2 ? 'solid' : 'black'];
  
   showImage: boolean = false;
-  message: string;
+  errorMessage: string;
   
   //the below will get and set the values for the list filter.
   _listFilter: string;
@@ -54,7 +54,12 @@ export class ProductListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.products = this.productService.getProducts();
-    this.filteredProducts = this.products;
+    this.productService.getProducts()
+      .subscribe(products => {
+        this.products = products;
+          this.filteredProducts = this.products;
+        },
+      error => this.errorMessage = <any>error);
+    //this.filteredProducts = this.products;
   }
 }
