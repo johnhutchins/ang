@@ -5,6 +5,7 @@ import "rxjs/add/operator/pairwise";
 
 import {IProduct} from "./product";
 import { ProductService } from "./product.service";
+import { PageTrackerService } from "../shared/page-tracker.service";
 
 
 @Component({
@@ -16,7 +17,7 @@ export class ProductDetailComponent implements OnInit {
   product: IProduct;
   errorMessage: string;
 
-  constructor(private route: ActivatedRoute, private router: Router, private productService: ProductService) { }
+  constructor(private route: ActivatedRoute, private router: Router, private productService: ProductService, private pageTrackerService: PageTrackerService) { }
 
   onBack(): void {
     this.router.navigate(['/products']);
@@ -37,13 +38,17 @@ export class ProductDetailComponent implements OnInit {
     this.productService.getProduct(id).subscribe(
       product => this.product = product,
       error => this.errorMessage = <any>error);
+  }
 
-      this.router.events
-      .filter((e: any) => e instanceof RoutesRecognized)
-      .pairwise()
-      .subscribe((e: any) => {
-        console.log(e[0].url);
-        //console.log("first route is: ", e[0], ". Second is: ", e[1]);
-      });
+  onSave(){
+    //call function that has stored the previous route...
+    console.log("The referring page is: ", this.pageTrackerService.referringLink);
+
+
+
+    //change that data to JSON format
+    //Send it to a local file
+    //should include the product details as well as the previous route
+
   }
 }

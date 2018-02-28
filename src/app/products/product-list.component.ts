@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { IProduct } from "./product";
 import { ProductService } from "./product.service";
+import { PageTrackerService } from "../shared/page-tracker.service";
 
 @Component({
   templateUrl: "./product-list.component.html",
@@ -32,7 +33,7 @@ export class ProductListComponent implements OnInit {
 
   //without the constructor here, no products will show. we need to make sure we initialize the products list
   //by using the constructor. simply setting the filteredProducts list to the products array 
-  constructor(private productService: ProductService) {
+  constructor(private productService: ProductService, private pageTrackerService: PageTrackerService) {
     this.filteredProducts = this.products;
     this.listFilter = " ";
   }
@@ -48,11 +49,14 @@ export class ProductListComponent implements OnInit {
   }
 
   onRatingClicked(message: string): void {
-    console.log(message);
+    //console.log(message);
     //this.pageTitle = "Product list: " + message;
   }
 
   ngOnInit(): void {
+    //TODO call the page tracker service here?
+    this.pageTrackerService.trackPage();
+
     this.productService.getProducts()
       .subscribe(products => {
         this.products = products;

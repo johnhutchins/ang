@@ -13,6 +13,7 @@ import { ProductService } from "./products/product.service";
 import { ProductDetailComponent } from './products/product-detail.component';
 import { WelcomeComponent } from "./home/welcome.component";
 import { ProductGuardService } from './products/product-guard.service';
+import { PageTrackerService } from "./shared/page-tracker.service";
 
 
 @NgModule({
@@ -37,7 +38,7 @@ import { ProductGuardService } from './products/product-guard.service';
       { path: '**', redirectTo: 'welcome', pathMatch: 'full' }
     ])
   ],
-  providers: [ ProductService, ProductGuardService ],
+  providers: [ ProductService, ProductGuardService, PageTrackerService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
